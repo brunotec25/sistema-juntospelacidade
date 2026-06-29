@@ -1,4 +1,4 @@
-export class Cidade {
+export class Usuario {
     id: Number;
     nome: string;
     email: string;
