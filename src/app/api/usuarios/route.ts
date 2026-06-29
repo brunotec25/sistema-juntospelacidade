@@ -1,0 +1,47 @@
+import { NextRequest, NextResponse } from "next/server";
+import { Usuario } from "@/classes/Usuario";
+import { cadastrarUsuario, listaUsuario } from "@/data/usuariosData";
+
+
+export async function GET() {
+    const usuarios = await listaUsuario();
+    return NextResponse.json(usuarios,
+        {
+            status: 200
+        }
+    );
+
+}
+
+export async function POST(request: NextRequest) {
+    const body = await request.json();
+
+    const usuario = new Usuario(
+        0,
+        body.nome,
+        usuario.nome,
+        usuario.email,
+        usuario.endereco,
+        usuario.senha,
+    );
+    const erro = usuario.validar();
+
+    if (erro) {
+        return NextResponse.json(
+            { erro: erro },
+            { status: 400 }
+        );
+    }
+
+    const idNovoUsuario = await cadastrarUsuario(usuario);
+    return NextRequest.json(
+        {
+            mensagem: "Usuario cadastrado com sucesso.",
+            id:idNovoUsuario
+        },
+
+        {status:201}
+
+    );
+    
+}
