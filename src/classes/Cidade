@@ -1,0 +1,8 @@
+export class Cidade {
+    id: Number;
+    nome: string;
+    email: string;
+    senha: string;
+    endereco: string;
+    
+}
