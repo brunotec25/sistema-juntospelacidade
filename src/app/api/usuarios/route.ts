@@ -19,10 +19,9 @@ export async function POST(request: NextRequest) {
     const usuario = new Usuario(
         0,
         body.nome,
-        usuario.nome,
-        usuario.email,
-        usuario.endereco,
-        usuario.senha,
+        body.email,
+        body.endereco,
+        body.senha,
     );
     const erro = usuario.validar();
 
