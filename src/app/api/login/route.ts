@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { Usuario } from "@/classes/Usuario";
 import { validarLogin } from "@/data/loginData";
 
 export async function POST(request:NextResponse) {
