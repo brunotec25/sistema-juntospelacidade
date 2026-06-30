@@ -27,7 +27,7 @@ const [resultado]:any = await conexao.query(
 return resultado [0];
 }
    
-export async function  cadastrarSolicitacoes(data_inicio: Date){
+export async function  cadastrarSolicitacoes(solicitacao: Solicitacao){
 const [resultado]: any= await conexao.query(
     "INSERT INTO solicitacoes (descricao, data_inicio, data_fim)  VALUES (?,?,?)",
     [
@@ -39,7 +39,7 @@ const [resultado]: any= await conexao.query(
 return resultado.insertIdde;
 }
  
-export async function  editarSolicitacoes(id: number, data_inicio:Date) {
+export async function  editarSolicitacoes(id: number, solicitacao: Solicitacao) {
     const [resultado]: any = await conexao.query(
         "UPDATE solicitacoes SET descricao, data_inicio, data_fim where id=?",
     [
