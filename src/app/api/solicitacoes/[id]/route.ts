@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Solicitacao } from "@/classes/Solicitacao";
-import {buscarSolicitacoesPorid,editarSolicitacoes,excluirSolicitacoes}from "@/data/solicitacoesData";
+import {buscarSolicitacoesPorId,editarSolicitacoes,excluirSolicitacoes}from "@/data/solicitacoesData";
 
 type Params = {
     params: Promise<{
@@ -19,7 +19,7 @@ if (isNaN(idSolicitacoes)) {
         );
     };
 
-    const solicitacoes = await buscarSolicitacoesPorid(idSolicitacoes);
+    const solicitacoes = await buscarSolicitacoesPorId(idSolicitacoes);
     if(!solicitacoes) {
       return NextResponse.json(
         {erro: "Solicitação não encontrada"},
