@@ -1,9 +1,13 @@
 import {conexao} from "@/lib/conexao";
-import {Usuario} from "@/classes/Usuario";
 
-export async function validarLogin() {
+export async function validarLogin(cpf:string,cnpj:string,senha:string) {
     const [resultado] = await conexao.query (
-        "SELECT * FROM juntospelacidade WHERE cpf = ? or  cnpj =?"
+        "SELECT * FROM juntospelacidade WHERE cpf = ? or  cnpj =? and senha = ?",
+        [
+            cpf,
+            cnpj,
+            senha
+        ]
     );
-    return resultado;
+    return resultado.affectedRows > 0;
 }
