@@ -1,55 +1,59 @@
 import {conexao} from "@/lib/conexao";
-import { Usuario } from "@/classes/Usuario";
+import { Solicitacao } from "@/classes/Solicitacao";
 
-export async function listarUsuario(){
+export async function consultarSolicitacoes(descricao:string) {
+    const termoBusca = `%${descricao}%`;
     const [resultado] = await conexao.query(
-        "Select id, nome, email, senha  FROM usuario"
+        "SELECT descricao, data_inicio, data_fim from solicitacoes WHERE descricao like ?",
+        [termoBusca]
+    );
+    return resultado;
+}
+
+
+export async function listarSolicitacoes(){
+    const [resultado] = await conexao.query(
+        "Select descricao, data_inicio, data_fim FROM solicitacoes"
     );
 
     return resultado;
 }
     
-export async function buscarUsuarioPorId(id: number){
-const [resultado]:any =await conexao.query(
-    "SELEC id, nome, email, senha  from usuario where id =?",
+export async function buscarSolicitacoesPorId(id: number){
+const [resultado]:any = await conexao.query(
+    "SELEC id, descricao, data_inicio, data_fim  from solicitacoes where id =?",
     [id]
 );
 return resultado [0];
 }
    
-export async function  cadastrarUsuario(usuario:Usuario){
+export async function  cadastrarSolicitacoes(data_inicio: Date){
 const [resultado]: any= await conexao.query(
-    "INSERT INTO usuario (nome , email ,senha ,endereco)  VALUES (?,?,?,?)",
+    "INSERT INTO solicitacoes (descricao, data_inicio, data_fim)  VALUES (?,?,?)",
     [
-    usuario.nome,
-    usuario.email,
-    usuario.senha,
-    usuario.endereco
+    solicitacao.descricao,
+    solicitacao.data_inicio,
+    solicitacao.data_fim
     ]
 );
-
-
-return resultado .insertId;
+return resultado.insertIdde;
 }
  
-export async function  editarUsuario(id: number, usuario:Usuario) {
+export async function  editarSolicitacoes(id: number, data_inicio:Date) {
     const [resultado]: any = await conexao.query(
-        "UPDATE usuario SET nome =?, email =?, senha=?, endereco=? where id=?",
+        "UPDATE solicitacoes SET descricao, data_inicio, data_fim where id=?",
     [
-        usuario.nome,
-        usuario.email,
-        usuario.senha,
-        usuario.endereco
+    solicitacao.descricao,
+    solicitacao.data_inicio,
+    solicitacao.data_fim
     ]
     );
-
-
-    return resultado .affctedRows >0;
+    return resultado .affctedRows > 0;
 }
 
-export async function excluirUsuario(id:number){
+export async function excluirSolicitacoes(id:number){
     const [resultado]: any =await conexao.query(
-        "DELETE FROM usuario where id=?",
+        "DELETE FROM solicitacoes where id=?",
         [id]
     );
     return resultado.affctedRows>0;
