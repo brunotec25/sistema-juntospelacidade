@@ -21,7 +21,7 @@ export async function listarSolicitacoes(){
     
 export async function buscarSolicitacoesPorId(id: number){
 const [resultado]:any = await conexao.query(
-    "SELEC id, descricao, data_inicio, data_fim  from solicitacoes where id =?",
+    "SELECT id, descricao, data_inicio, data_fim  from solicitacoes where id =?",
     [id]
 );
 return resultado [0];
@@ -29,14 +29,17 @@ return resultado [0];
    
 export async function  cadastrarSolicitacoes(solicitacao: Solicitacao){
 const [resultado]: any= await conexao.query(
-    "INSERT INTO solicitacoes (descricao, data_inicio, data_fim)  VALUES (?,?,?)",
+    "INSERT INTO solicitacoes (descricao, data_inicio, data_fim, pessoas_id_pessoas, enderecos_id_Enderecos, tipo)  VALUES (?,?,?,?,?,?)",
     [
     solicitacao.descricao,
     solicitacao.data_inicio,
-    solicitacao.data_fim
+    solicitacao.data_fim,
+    solicitacao. pessoas_id_pessoas,
+    solicitacao.enderecos_id_Enderecos,
+    solicitacao.tipo
     ]
 );
-return resultado.insertIdde;
+return resultado.insertId;
 }
  
 export async function  editarSolicitacoes(id: number, solicitacao: Solicitacao) {

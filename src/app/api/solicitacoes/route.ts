@@ -21,9 +21,12 @@ export async function POST (request : NextRequest) {
 
     const solicitacoes = new Solicitacao(
         0,
-        body.Solicitacao_id,
+        body.descricao,
         body.data_inicio,
         body.data_fim,
+        Number(body.pessoas_id_pessoas),
+        Number(body.enderecos_id_Enderecos),
+        body.tipo
 
     );
     const erro = solicitacoes.validar();
