@@ -21,7 +21,7 @@ export async function listarSolicitacoes(){
     
 export async function buscarSolicitacoesPorId(id: number){
 const [resultado]:any = await conexao.query(
-    "SELECT id, descricao, data_inicio, data_fim  from solicitacoes where id =?",
+    "SELECT  descricao, data_inicio, data_fim  from solicitacoes where id =?",
     [id]
 );
 return resultado [0];
