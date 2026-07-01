@@ -19,9 +19,9 @@ export async function buscarUsuarioPorID(id: number) {
 
 export async function cadastrarUsuario(usuario: Usuario) {
     const [resultado]: any = await conexao.query(
-        "INSERT INTO usuario (nome,email,senha,endereco,tipo_usuario)values(?,?,?,?)",
+        "INSERT INTO usuario (cpf,nome,email,senha,endereco,tipo_usuario)values(?,?,?,?,?)",
         [
-
+            usuario.cpf,
             usuario.nome,
             usuario.email,
             usuario.endereco,
@@ -34,9 +34,9 @@ export async function cadastrarUsuario(usuario: Usuario) {
 }
 export async function editarUsuario (id:number, usuario : Usuario) {
     const [resultado]: any =await conexao.query(
-        "UPDATE usuario SET nome = ? , email = ?,senha = ? ,endereco = ?,tipo_usuario = ? WHERE id = ?",
+        "UPDATE usuario SET cpf = ?, nome = ? , email = ?,senha = ? ,endereco = ?,tipo_usuario = ? WHERE id = ?",
     [
-
+        usuario.cpf,
          usuario.nome,
          usuario.email,
          usuario.endereco,
