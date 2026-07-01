@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Usuario } from "@/classes/Usuario";
-import { cadastrarUsuario, listaUsuario } from "@/data/usuariosData";
+import { cadastrarUsuario, listarUsuario } from "@/data/usuariosData";
 
 
 export async function GET() {
-    const usuarios = await listaUsuario();
+    const usuarios = await listarUsuario();
     return NextResponse.json(usuarios,
         {
             status: 200
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     }
 
     const idNovoUsuario = await cadastrarUsuario(usuario);
-    return NextRequest.json(
+    return NextResponse.json(
         {
             mensagem: "Usuario cadastrado com sucesso.",
             id:idNovoUsuario

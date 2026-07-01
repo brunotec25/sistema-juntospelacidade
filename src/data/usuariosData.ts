@@ -1,7 +1,7 @@
 import { conexao } from "@/lib/conexao";
 import { Usuario } from "@/classes/Usuario";
 
-export async function listaUsuario() {
+export async function listarUsuario() {
     const [resultado] = await conexao.query(
         "SELECT * FROM usuarios",
     );
